@@ -29,18 +29,10 @@ Make sure you have the following installed:
     npm install
     ```
 
-3. **Set up environment variables**
-
-    - Copy `.env.example` to `.env`
+3. **Run seeder**
 
     ```sh
-    cp .env.example .env
-    ```
-
-    - Generate application key
-
-    ```sh
-    php artisan key:generate
+    php artisan db:seed
     ```
 
 4. **Run the frontend build**
@@ -55,7 +47,17 @@ Make sure you have the following installed:
     php artisan serve
     ```
 
-6. **Access the project**
+6. **Start the development server**
+
+    ```sh
+    php artisan db:seed --class=CompanySeeder
+    ```
+
+    ```sh
+    php artisan db:seed
+    ```
+
+7. **Access the project**
    Open your browser and go to:
     ```
     http://127.0.0.1:8000
