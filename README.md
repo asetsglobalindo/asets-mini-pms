@@ -32,6 +32,10 @@ Make sure you have the following installed:
 3. **Run seeder**
 
     ```sh
+    php artisan db:seed --class=CompanySeeder
+    ```
+
+    ```sh
     php artisan db:seed
     ```
 
@@ -47,17 +51,7 @@ Make sure you have the following installed:
     php artisan serve
     ```
 
-6. **Start the development server**
-
-    ```sh
-    php artisan db:seed --class=CompanySeeder
-    ```
-
-    ```sh
-    php artisan db:seed
-    ```
-
-7. **Access the project**
+6. **Access the project**
    Open your browser and go to:
     ```
     http://127.0.0.1:8000
