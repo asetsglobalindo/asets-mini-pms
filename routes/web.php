@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ManajemenBisnis\KategoriBisnisController;
 
 Route::get('/', function () {
     return view('index');
@@ -45,9 +46,10 @@ Route::get('/item', function () {
     return view('manajemen-bisnis.item.index');
 });
 
-Route::get('/kategori-bisnis', function () {
-    return view('manajemen-bisnis.kategori-bisnis.index');
-});
+Route::get('/kategori-bisnis', [KategoriBisnisController::class, 'index'])->name('kategori-bisnis.index');
+Route::post('/kategori-bisnis', [KategoriBisnisController::class, 'store'])->name('kategori-bisnis.store');
+Route::put('/kategori-bisnis/{kategori_bisnis}', [KategoriBisnisController::class, 'update'])->name('kategori-bisnis.update');
+Route::delete('/kategori-bisnis/{kategori_bisnis}', [KategoriBisnisController::class, 'destroy'])->name('kategori-bisnis.delete');
 
 Route::get('/tenant', function () {
     return view('manajemen-bisnis.tenant.index');

@@ -30,7 +30,7 @@
             </flux:navlist.group>
 
             <flux:navlist.group expandable heading="MANAJEMEN BISNIS" class="hidden lg:grid">
-                <flux:navlist.item icon="briefcase" href="/kategori-bisnis">Kategori Bisnis</flux:navlist.item>
+                <flux:navlist.item icon="briefcase" href="{{ route('kategori-bisnis.index') }}">Kategori Bisnis</flux:navlist.item>
                 <flux:navlist.item icon="user-group" href="/tenant">Tenant</flux:navlist.item>
                 <flux:navlist.item icon="check-badge" href="/bisnis-status">Bisnis Status</flux:navlist.item>
                 <flux:navlist.item icon="cube" href="/item">Item</flux:navlist.item>
