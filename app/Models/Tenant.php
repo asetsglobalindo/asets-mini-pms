@@ -10,7 +10,7 @@ class Tenant extends Model
     use HasFactory;
 
     protected $table = 'tenants';
-    protected $primaryKey = 'tenant_id';
+    protected $primaryKey = 'id';
     public $timestamps = true;
 
     protected $fillable = [

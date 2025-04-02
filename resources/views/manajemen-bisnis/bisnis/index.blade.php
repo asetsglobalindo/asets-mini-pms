@@ -18,20 +18,20 @@
 
                 @slot('modalInputForm')
 
-                        <div>
-                            <flux:heading size="lg">Update profile</flux:heading>
-                            <flux:text class="mt-2">Make changes to your personal details.</flux:text>
-                        </div>
+                <div>
+                    <flux:heading size="lg">Update profile</flux:heading>
+                    <flux:text class="mt-2">Make changes to your personal details.</flux:text>
+                </div>
 
-                        <flux:input label="Name" placeholder="Your name" />
+                <flux:input label="Name" placeholder="Your name" />
 
-                        <flux:input label="Date of birth" type="date" />
+                <flux:input label="Date of birth" type="date" />
 
-                        <div class="flex">
-                            <flux:spacer />
+                <div class="flex">
+                    <flux:spacer />
 
-                            <flux:button type="submit" variant="primary">Simpan</flux:button>
-                        </div>
+                    <flux:button type="submit" variant="primary">Simpan</flux:button>
+                </div>
 
                 @endslot
 
@@ -50,37 +50,51 @@
         </div>
 
 
-           @component('components.table')
+        @component('components.table')
 
-                @slot('tableHead')
+        @slot('tableHead')
 
-                <tr>
-                    <!--[-->
-                    <td class="py-1 border border-gray-200 font-bold p-4" contenteditable="true">Product-ID</td>
-                    <td contenteditable="true" class="py-1 border border-gray-200 font-bold p-4">Description</td>
-                    <td contenteditable="true" class="py-1 border border-gray-200 font-bold p-4">Price</td>
-                    <td contenteditable="true" class="py-1 border border-gray-200 font-bold p-4">Action</td>
-                    <!--]-->
-                </tr>
-                @endslot
+        <tr class="border-b text-center">
+            <!--[-->
+            <td contenteditable="true" class="p-3">Product-ID</td>
+            <td contenteditable="true" class="p-3">Description</td>
+            <td contenteditable="true" class="p-3">Price</td>
+            <td contenteditable="true" class="p-3">Action</td>
+            <!--]-->
+        </tr>
+        @endslot
 
-                @slot('tableBody')
+        @slot('tableBody')
 
-                <tr class=" py-5">
-                    <!--[-->
-                    <td class=" py-5 border border-gray-200   p-4" contenteditable="true">YY-853581</td>
-                    <td contenteditable="true" class=" py-5 border border-gray-200   p-4">Notebook Basic</td>
-                    <td contenteditable="true" class=" py-5 border border-gray-200   p-4">$ 299</td>
-                    <td class="py-5 border-gray-200 p-4">
-                        <flux:button icon="pencil"></flux:button>
-                        <flux:button icon="trash"></flux:button>
-                    </td>
-                    <!--]-->
-                </tr>
+        <tr class="border-b">
+            <!--[-->
+            <td contenteditable="true" class="p-3">YY-853581</td>
+            <td contenteditable="true" class="p-3">Notebook Basic</td>
+            <td contenteditable="true" class="p-3">$ 299</td>
+            <td class="p-3 flex items-center space-x-2">
+                <button class="text-green-500">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                        </path>
+                    </svg>
+                </button>
+                <button class="text-red-500">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                        </path>
+                    </svg>
+                </button>
+            </td>
+            <!--]-->
+        </tr>
 
-                @endslot
+        @endslot
 
-           @endcomponent
+        @endcomponent
 
 
 
@@ -88,4 +102,8 @@
 
 
 
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> development

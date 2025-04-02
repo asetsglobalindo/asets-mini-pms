@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -14,6 +15,7 @@ class User extends Authenticatable
 
     protected $table = 'users';
     // protected $primaryKey = 'user_id';
+    protected $primaryKey = 'id';
     public $timestamps = true;
 
     protected $fillable = [
