@@ -119,10 +119,17 @@
                                                 <flux:input label="Email" type="email" name="email" placeholder="Masukkan Email" value="{{ $item->email ?? '' }}" />
                                                 <flux:input label="No. Telp" type="text" name="phone_number" placeholder="Masukkan No. Telp" value="{{ $item->phone_number ?? '' }}" />
 
+                                                <flux:select name="company_id" class="mb-4" label="Company">
+                                                    <flux:select.option>-- Pilih --</flux:select.option>
+                                                    @foreach ($companies as $company)
+                                                        <flux:select.option value="{{ $company->id }}" :selected="$item->company_id">{{ $company->name }}</flux:select.option>
+                                                    @endforeach
+                                                </flux:select>
+
                                                 <flux:select name="role_id" class="mb-4" label="Role">
                                                     <flux:select.option>-- Pilih --</flux:select.option>
                                                     @foreach ($roles as $role)
-                                                        <flux:select.option value="{{ $role->id }}" :selected="$item->hasRole($role->name)" >{{ $role->name }}</flux:select.option>
+                                                        <flux:select.option value="{{ $role->id }}" :selected="$item->hasRole($role->name)">{{ $role->name }}</flux:select.option>
                                                     @endforeach
                                                 </flux:select>
 

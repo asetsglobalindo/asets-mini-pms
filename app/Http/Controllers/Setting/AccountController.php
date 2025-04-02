@@ -61,7 +61,6 @@ class AccountController extends Controller
 
     public function update(Request $request, User $user)
     {
-
         $input = $request->all();
 
         $rules = [
