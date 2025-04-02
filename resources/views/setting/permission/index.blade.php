@@ -54,13 +54,11 @@
         @component('components.table')
             @slot('tableHead')
                 <tr>
-                    <!--[-->
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Nama</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Display Name</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Group</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Guard</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Action</td>
-                    <!--]-->
+                    <td contenteditable="false" class="w-40 py-1 border border-gray-200 font-bold p-4">Nama</td>
+                    <td contenteditable="false" class="w-52 py-1 border border-gray-200 font-bold p-4">Display Name</td>
+                    <td contenteditable="false" class="w-48 py-1 border border-gray-200 font-bold p-4">Group</td>
+                    <td contenteditable="false" class="w-40 py-1 border border-gray-200 font-bold p-4">Guard</td>
+                    <td contenteditable="false" class="w-24 py-1 border border-gray-200 font-bold p-4">Kelola</td>
                 </tr>
             @endslot
 
@@ -69,10 +67,10 @@
                     @foreach ($permissions as $item)
                         <tr class=" py-5">
                             <!--[-->
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->name }}</td>
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->display_name }}</td>
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->group }}</td>
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->guard_name }}</td>
+                            <td contenteditable="false" class=" py-5 border border-gray-200 p-4">{{ $item->name }}</td>
+                            <td contenteditable="false" class=" py-5 border border-gray-200 p-4">{{ $item->display_name }}</td>
+                            <td contenteditable="false" class=" py-5 border border-gray-200 p-4">{{ $item->group }}</td>
+                            <td contenteditable="false" class=" py-5 border border-gray-200 p-4">{{ $item->guard_name }}</td>
                             <td class="py-5 border-gray-200 p-4">
                                 @component('components.modal')
                                     @slot('buttonModal')

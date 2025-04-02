@@ -15,7 +15,7 @@
                     @endslot
 
                     @slot('buttonModal')
-                        <flux:button id="insert-data"> Tambah Data </flux:button>
+                        <flux:button> Tambah Data </flux:button>
                     @endslot
 
                     @slot('modalInputForm')
@@ -73,15 +73,13 @@
         @component('components.table')
             @slot('tableHead')
                 <tr>
-                    <!--[-->
-                    {{-- <td class="py-1 border border-gray-200 font-bold p-4" contenteditable="false">Nama Perusahaan</td> --}}
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Nama</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Email</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Perusahaan</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">No Telepon</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Role</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Action</td>
-                    <!--]-->
+                    <td contenteditable="false" class="w-40 py-1 border border-gray-200 font-bold p-4">Nama</td>
+                    <td contenteditable="false" class="w-52 py-1 border border-gray-200 font-bold p-4">Company</td>
+                    <td contenteditable="false" class="w-60 py-1 border border-gray-200 font-bold p-4">Email</td>
+                    <td contenteditable="false" class="w-32 py-1 border border-gray-200 font-bold p-4">No. Telp</td>
+                    <td contenteditable="false" class="w-28 py-1 border border-gray-200 font-bold p-4">Role</td>
+                    <td contenteditable="false" class="w-24 py-1 border border-gray-200 font-bold p-4">Status</td>
+                    <td contenteditable="false" class="w-24 py-1 border border-gray-200 font-bold p-4">Kelola</td>
                 </tr>
             @endslot
 
@@ -89,13 +87,12 @@
                 @if (count($users) > 0)
                     @foreach ($users as $item)
                         <tr class=" py-5">
-                            <!--[-->
-                            {{-- <td class=" py-5 border border-gray-200   p-4" contenteditable="false">{{ $item->company->name }}</td> --}}
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->name }}</td>
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->email }}</td>
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->company->name }}</td>
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->phone_number }}</td>
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->getRoleNames()[0] }}</td>
+                            <td contenteditable="false" class="text-sm py-5 border border-gray-200 p-4">{{ $item->name }}</td>
+                            <td contenteditable="false" class="text-sm py-5 border border-gray-200 p-4">{{ $item->company->name }}</td>
+                            <td contenteditable="false" class="text-sm py-5 border border-gray-200 p-4">{{ $item->email }}</td>
+                            <td contenteditable="false" class="text-sm py-5 border border-gray-200 p-4">{{ $item->phone_number }}</td>
+                            <td contenteditable="false" class="text-sm py-5 border border-gray-200 p-4">{{ $item->getRoleNames()[0] }}</td>
+                            <td contenteditable="false" class="text-sm py-5 border border-gray-200 p-4">{{ $item->is_active ? 'Active' : 'Inactive' }}</td>
                             <td class="py-5 border-gray-200 p-4">
                                 @component('components.modal')
                                     @slot('buttonModal')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +30,16 @@ class AuthController extends Controller
 
         // Cek apakah pengguna ingin tetap login (remember me)
         $remember = $request->remember ? true : false;
+
+        $user = User::where('email', $request->email)->first();
+
+        if (empty($user)) {
+            return back()->withErrors(['email' => 'Email atau password salah.'])->withInput($request->only('email'));
+        }
+
+        if (!$user->is_active) {
+            return back()->withErrors(['email' => 'Akun anda tidak aktif, silahkan hubungi admin.'])->withInput($request->only('email'));
+        }
 
         // Cek kredensial dan login
         if (Auth::attempt($credentials, $remember)) {

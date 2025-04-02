@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Setting;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\User;
+use Flux\Flux;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
@@ -13,7 +14,6 @@ class AccountController extends Controller
 {
     public function index()
     {
-
         $users = User::with('company')->get();
         $roles = Role::all();
         $companies = Company::all();
@@ -29,6 +29,7 @@ class AccountController extends Controller
         $rules = [
             'company_id' => 'required|exists:companies,id',
             'name' => 'required|string|max:255',
+            'phone_number' => 'required|regex:/^[0-9]{10,15}$/',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:6|max:255|confirmed',
             'role_id' => 'required|exists:roles,id',
@@ -50,6 +51,7 @@ class AccountController extends Controller
             'company_id' => $request->company_id,
             'name' => $request->name,
             'email' => $request->email,
+            'phone_number' => $request->phone_number,
             'password' => bcrypt($request->password),
         ]);
 
@@ -66,6 +68,7 @@ class AccountController extends Controller
         $rules = [
             'company_id' => 'required|exists:companies,id',
             'name' => 'required|string|max:255',
+            'phone_number' => 'required|regex:/^[0-9]{10,15}$/',
             'email' => 'required|email|max:255|unique:users,email,' . ($user->id ?? 'NULL'),
             'role_id' => 'required|exists:roles,id',
         ];
@@ -86,6 +89,7 @@ class AccountController extends Controller
         $user->company_id = $request->company_id;
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
         $user->save();
 
         $roleName = Role::findOrFail($request->role_id)->name;

@@ -9,7 +9,7 @@
                 @csrf
 
                 <!-- Email -->
-                <flux:input label="Email" type="email" name="email" placeholder="Masukkan Email" required autofocus />
+                <flux:input label="Email" type="email" name="email" value="{{ old('email') }}" placeholder="Masukkan Email" required autofocus />
 
                 <!-- Password -->
                 <flux:input label="Password" type="password" name="password" placeholder="Masukkan Password" required />
