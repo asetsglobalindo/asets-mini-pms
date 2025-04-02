@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ManajemenBisnis\KategoriBisnisController;
+use App\Http\Controllers\ManajemenBisnis\TenantController;
 
 Route::get('/', function () {
     return view('index');
@@ -51,9 +52,12 @@ Route::post('/kategori-bisnis', [KategoriBisnisController::class, 'store'])->nam
 Route::put('/kategori-bisnis/{kategori_bisnis}', [KategoriBisnisController::class, 'update'])->name('kategori-bisnis.update');
 Route::delete('/kategori-bisnis/{kategori_bisnis}', [KategoriBisnisController::class, 'destroy'])->name('kategori-bisnis.delete');
 
-Route::get('/tenant', function () {
-    return view('manajemen-bisnis.tenant.index');
-});
+
+Route::get('/tenant', [TenantController::class, 'index'])->name('tenant.index');
+Route::post('/tenant', [TenantController::class, 'store'])->name('tenant.store');
+Route::put('/tenant/{tenant}', [TenantController::class, 'update'])->name('tenant.update');
+Route::delete('/tenant/{tenant}', [TenantController::class, 'destroy'])->name('tenant.delete');
+
 // MANAJEMEN BISNIS END
 
 // LAPORAN START
