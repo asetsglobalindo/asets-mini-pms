@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Setting\AccountController;
+use App\Http\Controllers\Setting\PermissionController;
+use App\Http\Controllers\Setting\RoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -64,16 +67,25 @@ Route::get('/pendapatan-total', function () {
 });
 // LAPORAN END
 
-// LAPORAN START
-Route::get('/account', function () {
-    return view('setting.account.index');
+// SETTING START
+Route::prefix('/account')->name('account.')->group(function ($q) {
+    Route::get('/', [AccountController::class, 'index'])->name('index');
+    Route::post('/', [AccountController::class, 'store'])->name('store');
+    Route::put('/{user}', [AccountController::class, 'update'])->name('update');
+    Route::delete('/{user}', [AccountController::class, 'destroy'])->name('delete');
 });
 
-Route::get('/role', function () {
-    return view('setting.role.index');
+Route::prefix('/role')->name('role.')->group(function ($q) {
+    Route::get('/', [RoleController::class, 'index'])->name('index');
+    Route::post('/', [RoleController::class, 'store'])->name('store');
+    Route::put('/{role}', [RoleController::class, 'update'])->name('update');
+    Route::delete('/{role}', [RoleController::class, 'destroy'])->name('delete');
 });
 
-Route::get('/permission', function () {
-    return view('setting.permission.index');
+Route::prefix('/permission')->name('permission.')->group(function ($q) {
+    Route::get('/', [PermissionController::class, 'index'])->name('index');
+    Route::post('/', [PermissionController::class, 'store'])->name('store');
+    Route::put('/{permission}', [PermissionController::class, 'update'])->name('update');
+    Route::delete('/{permission}', [PermissionController::class, 'destroy'])->name('delete');
 });
-// LAPORAN END
+// SETTING END

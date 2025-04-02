@@ -10,7 +10,7 @@ class Company extends Model
     use HasFactory;
 
     protected $table = 'companies';
-    protected $primaryKey = 'company_id';
+    // protected $primaryKey = 'company_id';
     public $timestamps = true;
 
     protected $fillable = [
