@@ -12,9 +12,22 @@ use Spatie\Permission\Models\Role;
 
 class AccountController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::with('company')->get();
+        $users = User::with('company')
+            ->when(!empty($request->search), function ($q) use ($request) {
+                $search = $request->search;
+                $q->where(function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%")
+                          ->orWhere('email', 'like', "%{$search}%")
+                          ->orWhere('phone_number', 'like', "%{$search}%");
+                })
+                ->orWhereHas('company', function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+                });
+
+            })
+            ->paginate(10);
         $roles = Role::all();
         $companies = Company::all();
 

@@ -42,7 +42,7 @@
 
             <div>
 
-                <flux:input class="md:w-80" icon="magnifying-glass" placeholder="Cari data" />
+                <flux:input id="searchInput" class="md:w-80" icon="magnifying-glass" :value="request()->search ?? ''" autofocus placeholder="Cari data" />
 
             </div>
 
@@ -51,56 +51,67 @@
 
         @component('components.table')
             @slot('tableHead')
-                <tr>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Nama</td>
-                    <td contenteditable="false" class="w-40 py-1 border border-gray-200 font-bold p-4">Kelola</td>
+                <tr class="border-b text-center">
+                    <td contenteditable="false" class="p-3 font-bold">Nama</td>
+                    <td contenteditable="false" class="w-40 p-3 font-bold">Kelola</td>
                 </tr>
             @endslot
 
             @slot('tableBody')
                 @if (count($roles) > 0)
                     @foreach ($roles as $item)
-                        <tr class=" py-5">
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->name }}</td>
-                            <td class="py-5 border-gray-200 p-4">
-                                @component('components.modal')
-                                    @slot('buttonModal')
-                                        <flux:button variant="primary" icon="pencil"></flux:button>
-                                    @endslot
+                        <tr class="border-b">
+                            <td contenteditable="false" class="p-3">{{ $item->name }}</td>
+                            <td class="p-3">
+                                <div class="flex justify-center items-center space-x-2">
+                                    <div>
+                                        @component('components.modal')
+                                            @slot('buttonModal')
+                                                <button class="text-green-500">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            @endslot
+                                            @slot('triggerModal')
+                                                modal-edit-{{ $item->id }}
+                                            @endslot
+                                            @slot('modalInputForm')
+                                                <div>
+                                                    <flux:heading size="lg">Edit Data</flux:heading>
+                                                    <flux:text class="mt-2">Edit role.</flux:text>
+                                                </div>
 
-                                    @slot('triggerModal')
-                                        modal-edit-{{ $item->id }}
-                                    @endslot
+                                                <form action="{{ route('role.update', $item->id) }}" method="post">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <flux:input label="Nama" type="text" name="name" placeholder="Masukkan Nama"
+                                                        value="{{ $item->name ?? '' }}" />
 
-                                    @slot('modalInputForm')
-                                        <div>
-                                            <flux:heading size="lg">Edit Data</flux:heading>
-                                            <flux:text class="mt-2">Edit role.</flux:text>
-                                        </div>
+                                                    <div class="flex">
+                                                        <flux:spacer />
 
-                                        <form action="{{ route('role.update', $item->id) }}" method="post">
-                                            @csrf
-                                            @method('PUT')
-                                                <flux:input label="Nama" type="text" name="name" placeholder="Masukkan Nama" value="{{ $item->name ?? '' }}" />
+                                                        <flux:button type="submit" variant="primary">Simpan</flux:button>
+                                                    </div>
+                                                </form>
+                                            @endslot
+                                        @endcomponent
+                                    </div>
 
-                                            <div class="flex">
-                                                <flux:spacer />
-
-                                                <flux:button type="submit" variant="primary">Simpan</flux:button>
-                                            </div>
-                                        </form>
-                                    @endslot
-                                @endcomponent
-
-                                @component('components.modal-delete')
-                                    @slot('triggerName')
-                                        modal-delete-{{ $item->id }}
-                                    @endslot
-
-                                    @slot('url')
-                                        {{ route('role.delete', $item->id) }}
-                                    @endslot
-                                @endcomponent
+                                    <div>
+                                        @component('components.modal-delete')
+                                            @slot('triggerName')
+                                                modal-delete-{{ $item->id }}
+                                            @endslot
+                                            @slot('url')
+                                                {{ route('role.delete', $item->id) }}
+                                            @endslot
+                                        @endcomponent
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -113,6 +124,10 @@
                 @endif
             @endslot
         @endcomponent
+
+        {{ $roles->links() }}
+
+        @include('components.search-script')
 
     </flux:main>
 @endsection
