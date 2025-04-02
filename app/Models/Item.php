@@ -10,7 +10,7 @@ class Item extends Model
     use HasFactory;
 
     protected $table = 'items';
-    protected $primaryKey = 'item_id';
+    protected $primaryKey = 'id';
     public $timestamps = true;
 
     protected $fillable = [

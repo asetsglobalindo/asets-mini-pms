@@ -5,6 +5,8 @@ use App\Http\Controllers\Setting\AccountController;
 use App\Http\Controllers\Setting\PermissionController;
 use App\Http\Controllers\Setting\RoleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ManajemenBisnis\KategoriBisnisController;
+use App\Http\Controllers\ManajemenBisnis\TenantController;
 
 
 Route::middleware('guest')->group(function () {
@@ -53,19 +55,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice', function () {
         return view('manajemen-bisnis.invoice.index');
     });
-
     Route::get('/item', function () {
         return view('manajemen-bisnis.item.index');
     });
 
-    Route::get('/kategori-bisnis', function () {
-        return view('manajemen-bisnis.kategori-bisnis.index');
-    });
+    Route::get('/kategori-bisnis', [KategoriBisnisController::class, 'index'])->name('kategori-bisnis.index');
+    Route::post('/kategori-bisnis', [KategoriBisnisController::class, 'store'])->name('kategori-bisnis.store');
+    Route::put('/kategori-bisnis/{kategori_bisnis}', [KategoriBisnisController::class, 'update'])->name('kategori-bisnis.update');
+    Route::delete('/kategori-bisnis/{kategori_bisnis}', [KategoriBisnisController::class, 'destroy'])->name('kategori-bisnis.delete');
 
-    Route::get('/tenant', function () {
-        return view('manajemen-bisnis.tenant.index');
-    });
-    // MANAJEMEN BISNIS END
+
+    Route::get('/tenant', [TenantController::class, 'index'])->name('tenant.index');
+    Route::post('/tenant', [TenantController::class, 'store'])->name('tenant.store');
+    Route::put('/tenant/{tenant}', [TenantController::class, 'update'])->name('tenant.update');
+    Route::delete('/tenant/{tenant}', [TenantController::class, 'destroy'])->name('tenant.delete');
 
     // LAPORAN START
     Route::get('/pendapatan-listing', function () {
