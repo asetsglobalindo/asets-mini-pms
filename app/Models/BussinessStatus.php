@@ -10,7 +10,7 @@ class BussinessStatus extends Model
     use HasFactory;
 
     protected $table = 'bussiness_status';
-    protected $primaryKey = 'busstat_id';
+    protected $primaryKey = 'id';
     public $timestamps = true;
 
     protected $fillable = [
