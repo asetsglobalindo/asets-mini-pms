@@ -1,4 +1,5 @@
 <flux:modal.trigger name="{{ $triggerModal }}">
+    {{-- <flux:button>{{ $buttonModal }}</flux:button> --}}
     {{ $buttonModal }}
 </flux:modal.trigger>
 
