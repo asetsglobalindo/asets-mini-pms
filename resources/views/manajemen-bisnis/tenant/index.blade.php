@@ -52,14 +52,14 @@
 
         @component('components.table')
         @slot('tableHead')
-        <tr class="border-b text-center">
+        <tr class="border-b">
             <td class="p-3 font-bold">Kategori Bisnis</td>
             <td class="p-3 font-bold">Nama Tenant</td>
             <td class="p-3 font-bold">Nomor Telepon</td>
             <td class="p-3 font-bold">Email</td>
             <td class="p-3 font-bold">Nama PIC</td>
             <td class="p-3 font-bold">Nama Brand</td>
-            <td class="p-3 font-bold">Alamat</td>
+            <td class="p-3 font-bold w-[500px]">Alamat</td>
             <td class="p-3 font-bold">Action</td>
         </tr>
         @endslot
@@ -67,13 +67,13 @@
         @slot('tableBody')
         @foreach ($daftar_tenants as $tenant)
             <tr class="border-b">
-                <td class="p-3">{{ $tenant->businessCategory->name }}</td>
-                <td class="p-3">{{ $tenant->tenant_name }}</td>
-                <td class="p-3">{{ $tenant->phone }}</td>
-                <td class="p-3">{{ $tenant->email }}</td>
-                <td class="p-3">{{ $tenant->pic_name }}</td>
-                <td class="p-3">{{ $tenant->brand_name }}</td>
-                <td class="p-3">{{ $tenant->address }}</td>
+                <td class="p-3 min-w-[200px]">{{ $tenant->businessCategory->name }}</td>
+                <td class="p-3 min-w-[200px]">{{ $tenant->tenant_name }}</td>
+                <td class="p-3 min-w-[200px]">{{ $tenant->phone }}</td>
+                <td class="p-3 min-w-[200px]">{{ $tenant->email }}</td>
+                <td class="p-3 min-w-[200px]">{{ $tenant->pic_name }}</td>
+                <td class="p-3 min-w-[200px]">{{ $tenant->brand_name }}</td>
+                <td class="p-3 min-w-[500px]">{{ $tenant->address }}</td>
                 <td class="p-3">
                     <div class="flex justify-center items-center space-x-2">
                         <div>

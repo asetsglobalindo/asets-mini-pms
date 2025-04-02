@@ -102,8 +102,4 @@
 
 
 
-<<<<<<< HEAD
 @endsection
-=======
-@endsection
->>>>>>> development
