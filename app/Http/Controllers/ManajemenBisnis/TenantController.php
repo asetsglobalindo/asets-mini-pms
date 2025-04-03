@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class TenantController extends Controller
 {
-    public function index() {
-
-        $daftar_tenant = Tenant::all();
+    public function index()
+    {
+        $daftar_tenants = Tenant::with('businessCategory')->get();
 
         $daftar_busscat = BusinessCategory::all();
 
-        return view('manajemen-bisnis.tenant.index', compact('daftar_tenant','daftar_busscat'));
+        return view('manajemen-bisnis.tenant.index', compact('daftar_tenants', 'daftar_busscat'));
     }
 
     public function store(Request $request)
@@ -26,6 +26,7 @@ class TenantController extends Controller
         $input = $request->all();
 
         $rules = [
+
             'company_id' => 1,
             'busscat_id' => ['required'],
             'tenant_name' => ['required'],

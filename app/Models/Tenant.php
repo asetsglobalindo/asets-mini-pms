@@ -33,6 +33,6 @@ class Tenant extends Model
     // Relationship with BusinessCategory model
     public function businessCategory()
     {
-        return $this->belongsTo(BusinessCategory::class, 'busscat_id');
+        return $this->belongsTo(BusinessCategory::class, 'busscat_id', 'id');
     }
 }
