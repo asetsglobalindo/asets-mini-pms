@@ -13,11 +13,8 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasRoles;
 
     protected $table = 'users';
-<<<<<<< HEAD
     // protected $primaryKey = 'user_id';
-=======
     protected $primaryKey = 'id';
->>>>>>> development
     public $timestamps = true;
 
     protected $fillable = [

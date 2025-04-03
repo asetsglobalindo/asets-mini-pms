@@ -6,6 +6,7 @@ use App\Http\Controllers\Setting\PermissionController;
 use App\Http\Controllers\Setting\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ManajemenBisnis\KategoriBisnisController;
+use App\Http\Controllers\ManajemenBisnis\BisnisStatusController;
 use App\Http\Controllers\ManajemenBisnis\TenantController;
 
 
@@ -44,9 +45,10 @@ Route::middleware('auth')->group(function () {
         return view('manajemen-bisnis.bisnis.index');
     });
 
-    Route::get('/bisnis-status', function () {
-        return view('manajemen-bisnis.bisnis-status.index');
-    });
+    Route::get('/bisnis-status', [BisnisStatusController::class, 'index'])->name('bisnis-status.index');
+    Route::post('/bisnis-status', [BisnisStatusController::class, 'store'])->name('bisnis-status.store');
+    Route::put('/bisnis-status/{bisnis_status}', [BisnisStatusController::class, 'update'])->name('bisnis-status.update');
+    Route::delete('/bisnis-status/{bisnis_status}', [BisnisStatusController::class, 'destroy'])->name('bisnis-status.delete');
 
     Route::get('/document', function () {
         return view('manajemen-bisnis.document.index');

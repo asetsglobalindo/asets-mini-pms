@@ -13,11 +13,11 @@ class TenantController extends Controller
 {
     public function index() {
 
-        $daftar_tenants = Tenant::all();
+        $daftar_tenant = Tenant::all();
 
         $daftar_busscat = BusinessCategory::all();
 
-        return view('manajemen-bisnis.tenant.index', compact('daftar_tenants','daftar_busscat'));
+        return view('manajemen-bisnis.tenant.index', compact('daftar_tenant','daftar_busscat'));
     }
 
     public function store(Request $request)
@@ -26,7 +26,7 @@ class TenantController extends Controller
         $input = $request->all();
 
         $rules = [
-            'company_id' => ['required'],
+            'company_id' => 1,
             'busscat_id' => ['required'],
             'tenant_name' => ['required'],
             'phone' => ['required'],
@@ -41,7 +41,7 @@ class TenantController extends Controller
         ];
 
 
-        $validates = Validator::make($input, $rules, $messages)->validate();
+        // $validates = Validator::make($input, $rules, $messages)->validate();
 
         $tenant = Tenant::create([
             'company_id' => 1,
