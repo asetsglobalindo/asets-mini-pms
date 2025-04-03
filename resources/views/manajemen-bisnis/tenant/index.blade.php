@@ -28,12 +28,12 @@
                         @endforeach
                     </flux:select>
 
-                    <flux:input label="Nama Tenant" type="text" name="tenant_name" placeholder="Nama tenant" />
-                    <flux:input label="Nomor Telepon" type="number" name="phone" placeholder="Nomor telepon tenant" />
-                    <flux:input label="Email" type="email" name="email" placeholder="Email tenant" />
-                    <flux:input label="Nama PIC" type="text" name="pic_name" placeholder="Nama PIC" />
-                    <flux:input label="Nama Brand" type="text" name="brand_name" placeholder="Nama Brand" />
-                    <flux:textarea label="Alamat" name="address" placeholder="Masukkan alamat tenant" />
+                    <flux:input label="Nama Tenant" type="text" name="tenant_name" placeholder="Nama tenant"  required/>
+                    <flux:input label="Nomor Telepon" type="number" name="phone" placeholder="Nomor telepon tenant"  required/>
+                    <flux:input label="Email" type="email" name="email" placeholder="Email tenant"  required/>
+                    <flux:input label="Nama PIC" type="text" name="pic_name" placeholder="Nama PIC"  required/>
+                    <flux:input label="Nama Brand" type="text" name="brand_name" placeholder="Nama Brand" required />
+                    <flux:textarea label="Alamat" name="address" placeholder="Masukkan alamat tenant" required />
 
                     <div class="flex mt-5">
                         <flux:spacer />

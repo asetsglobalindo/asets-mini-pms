@@ -7,6 +7,7 @@ use App\Http\Controllers\Setting\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ManajemenBisnis\KategoriBisnisController;
 use App\Http\Controllers\ManajemenBisnis\BisnisStatusController;
+use App\Http\Controllers\ManajemenBisnis\ItemController;
 use App\Http\Controllers\ManajemenBisnis\TenantController;
 
 
@@ -57,9 +58,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice', function () {
         return view('manajemen-bisnis.invoice.index');
     });
-    Route::get('/item', function () {
-        return view('manajemen-bisnis.item.index');
-    });
+
+    Route::get('/item', [ItemController::class, 'index'])->name('item.index');
+    Route::post('/item', [ItemController::class, 'store'])->name('item.store');
+    Route::put('/item/{item}', [ItemController::class, 'update'])->name('item.update');
+    Route::delete('/item/{item}', [ItemController::class, 'destroy'])->name('item.delete');
 
     Route::get('/kategori-bisnis', [KategoriBisnisController::class, 'index'])->name('kategori-bisnis.index');
     Route::post('/kategori-bisnis', [KategoriBisnisController::class, 'store'])->name('kategori-bisnis.store');

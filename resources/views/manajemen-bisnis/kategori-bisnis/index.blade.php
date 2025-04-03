@@ -27,7 +27,7 @@
 
                     @csrf
 
-                    <flux:input label="Kategori Bisnis" type="text" name="name" placeholder="Nama kategori bisnis" />
+                    <flux:input label="Kategori Bisnis" type="text" name="name" placeholder="Nama kategori bisnis" required />
 
 
                     <div class="flex mt-5">

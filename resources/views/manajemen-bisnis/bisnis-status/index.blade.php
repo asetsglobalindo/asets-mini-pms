@@ -28,9 +28,9 @@
 
                     @csrf
 
-                    <flux:input  label="Warna" type="color" name="color" />
+                    <flux:input  label="Warna" type="color" name="color" required />
 
-                    <flux:input label="Nama" type="text" name="name" placeholder="Nama status bisnis" />
+                    <flux:input label="Nama" type="text" name="name" placeholder="Nama status bisnis" required />
 
 
                     <div class="flex mt-5">
