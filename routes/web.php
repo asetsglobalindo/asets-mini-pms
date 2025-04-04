@@ -5,10 +5,18 @@ use App\Http\Controllers\Setting\AccountController;
 use App\Http\Controllers\Setting\PermissionController;
 use App\Http\Controllers\Setting\RoleController;
 use Illuminate\Support\Facades\Route;
+
+
+// Controller manajemen bisnis
 use App\Http\Controllers\ManajemenBisnis\KategoriBisnisController;
 use App\Http\Controllers\ManajemenBisnis\BisnisStatusController;
 use App\Http\Controllers\ManajemenBisnis\ItemController;
 use App\Http\Controllers\ManajemenBisnis\TenantController;
+
+
+// Controllers Inventory
+use App\Http\Controllers\Inventory\JenisRuanganController;
+
 
 
 Route::middleware('guest')->group(function () {
@@ -36,9 +44,11 @@ Route::middleware('auth')->group(function () {
         return view('inventory.fasilitas-umum.index');
     });
 
-    Route::get('/jenis-ruangan', function () {
-        return view('inventory.jenis-ruangan.index');
-    });
+
+    Route::get('/jenis-ruangan', [JenisRuanganController::class, 'index'])->name('jenis-ruangan.index');
+    Route::post('/jenis-ruangan', [JenisRuanganController::class, 'store'])->name('jenis-ruangan.store');
+    Route::put('/jenis-ruangan/{jenis_ruangan}', [JenisRuanganController::class, 'update'])->name('jenis-ruangan.update');
+    Route::delete('/jenis-ruangan/{jenis_ruangan}', [JenisRuanganController::class, 'destroy'])->name('jenis-ruangan.delete');
     // INVENTROY END
 
     // MANAJEMEN BISNIS START
