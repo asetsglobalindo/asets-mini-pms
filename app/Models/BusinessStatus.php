@@ -5,34 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tenant extends Model
+class BusinessStatus extends Model
 {
     use HasFactory;
 
-    protected $table = 'tenants';
+    protected $table = 'bussiness_status';
     protected $primaryKey = 'id';
     public $timestamps = true;
 
     protected $fillable = [
         'company_id',
-        'busscat_id',
-        'tenant_name',
-        'phone',
-        'email',
-        'pic_name',
-        'brand_name',
-        'address',
+        'color',
+        'name',
     ];
 
     // Relationship with Company model
     public function company()
     {
         return $this->belongsTo(Company::class, 'company_id');
-    }
-
-    // Relationship with BusinessCategory model
-    public function businessCategory()
-    {
-        return $this->belongsTo(BusinessCategory::class, 'busscat_id', 'id');
     }
 }
