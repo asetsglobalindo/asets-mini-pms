@@ -20,7 +20,7 @@
 
                 <div>
                     <flux:heading size="lg">Tambah Data</flux:heading>
-                    <flux:text required class="mt-2">Tambah jenis ruangan.</flux:text>
+                    <flux:text required class="mt-2">Tambah fasilitas umum.</flux:text>
                 </div>
 
                 <form action="{{ route('fasilitas-umum.store') }}" method="post">

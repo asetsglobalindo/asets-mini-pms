@@ -17,6 +17,7 @@ use App\Http\Controllers\ManajemenBisnis\TenantController;
 // Controllers Inventory
 use App\Http\Controllers\Inventory\JenisRuanganController;
 use App\Http\Controllers\Inventory\FasilitasUmumController;
+use App\Http\Controllers\Inventory\FasilitasListingController;
 
 
 
@@ -37,9 +38,10 @@ Route::middleware('auth')->group(function () {
         return view('inventory.listing.index');
     });
 
-    Route::get('/fasilitas-listing', function () {
-        return view('inventory.fasilitas-listing.index');
-    });
+    Route::get('/fasilitas-listing', [FasilitasListingController::class, 'index'])->name('fasilitas-listing.index');
+    Route::post('/fasilitas-listing', [FasilitasListingController::class, 'store'])->name('fasilitas-listing.store');
+    Route::put('/fasilitas-listing/{fasilitas_listing}', [FasilitasListingController::class, 'update'])->name('fasilitas-listing.update');
+    Route::delete('/fasilitas-listing/{fasilitas_listing}', [FasilitasListingController::class, 'destroy'])->name('fasilitas-listing.delete');
 
 
     Route::get('/fasilitas-umum', [FasilitasUmumController::class, 'index'])->name('fasilitas-umum.index');
