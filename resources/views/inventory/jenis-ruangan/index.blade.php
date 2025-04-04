@@ -90,8 +90,8 @@
                                     @csrf
                                     @method('put')
 
-                                    <flux:input label="Kategori Bisnis" value="{{ $jenis_ruangan->name ?? '' }}" type="text"
-                                        name="name" placeholder="Nama kategori bisnis" />
+                                    <flux:input label="Jenis Ruangan" value="{{ $jenis_ruangan->name ?? '' }}" type="text"
+                                        name="name" placeholder="Nama jenis ruangan" />
 
                                     <div class="flex mt-5">
                                         <flux:spacer />
