@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ManajemenBisnis\DocumentController;
 use App\Http\Controllers\Setting\AccountController;
 use App\Http\Controllers\Setting\PermissionController;
 use App\Http\Controllers\Setting\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ManajemenBisnis\KategoriBisnisController;
 use App\Http\Controllers\ManajemenBisnis\TenantController;
-
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -18,6 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/', function () {
+        // dd(Auth::user());
+        // dd(auth()->user());
         return view('index');
     });
 
@@ -48,10 +51,6 @@ Route::middleware('auth')->group(function () {
         return view('manajemen-bisnis.bisnis-status.index');
     });
 
-    Route::get('/document', function () {
-        return view('manajemen-bisnis.document.index');
-    });
-
     Route::get('/invoice', function () {
         return view('manajemen-bisnis.invoice.index');
     });
@@ -69,6 +68,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/tenant', [TenantController::class, 'store'])->name('tenant.store');
     Route::put('/tenant/{tenant}', [TenantController::class, 'update'])->name('tenant.update');
     Route::delete('/tenant/{tenant}', [TenantController::class, 'destroy'])->name('tenant.delete');
+
+    Route::get('/document', function () {
+        return view('manajemen-bisnis.document.index');
+    });
+    Route::post('/document', [DocumentController::class, 'quotation'])->name('document.quotation.store');
 
     // LAPORAN START
     Route::get('/pendapatan-listing', function () {
