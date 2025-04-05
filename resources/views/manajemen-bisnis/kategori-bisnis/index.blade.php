@@ -9,7 +9,6 @@
 
         <div class="flex justify-end mb-4 gap-4">
             <div>
-
                 @component('components.modal')
 
                 @slot('triggerModal') insert-data @endslot
@@ -28,7 +27,7 @@
 
                     @csrf
 
-                    <flux:input label="Kategori Bisnis" type="text" name="name" placeholder="Nama kategori bisnis" />
+                    <flux:input label="Kategori Bisnis" type="text" name="name" placeholder="Nama kategori bisnis" required />
 
 
                     <div class="flex mt-5">
@@ -40,7 +39,6 @@
                 @endslot
 
                 @endcomponent
-
             </div>
 
             <div>

@@ -15,7 +15,7 @@
                     @endslot
 
                     @slot('buttonModal')
-                        <flux:button id="insert-data"> Tambah Data </flux:button>
+                        <flux:button> Tambah Data </flux:button>
                     @endslot
 
                     @slot('modalInputForm')
@@ -46,7 +46,8 @@
                             </flux:select>
 
                             <flux:input label="Password" type="password" name="password" placeholder="Masukkan Password" />
-                            <flux:input label="Password Confirmation" type="password" name="password_confirmation" placeholder="Masukkan Password Konfirmasi" />
+                            <flux:input label="Password Confirmation" type="password" name="password_confirmation"
+                                placeholder="Masukkan Password Konfirmasi" />
 
 
                             <div class="flex">
@@ -62,8 +63,7 @@
 
             <div>
 
-
-                <flux:input class="md:w-80" icon="magnifying-glass" placeholder="Cari data" />
+                <flux:input id="searchInput" class="md:w-80" icon="magnifying-glass" :value="request()->search ?? ''" autofocus placeholder="Cari data" />
 
             </div>
 
@@ -72,87 +72,99 @@
 
         @component('components.table')
             @slot('tableHead')
-                <tr>
-                    <!--[-->
-                    {{-- <td class="py-1 border border-gray-200 font-bold p-4" contenteditable="false">Nama Perusahaan</td> --}}
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Nama</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Email</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Perusahaan</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">No Telepon</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Role</td>
-                    <td contenteditable="false" class="py-1 border border-gray-200 font-bold p-4">Action</td>
-                    <!--]-->
+                <tr class="border-b text-center">
+                    <td contenteditable="false" class="w-40 p-3 font-bold">Nama</td>
+                    <td contenteditable="false" class="w-52 p-3 font-bold">Company</td>
+                    <td contenteditable="false" class="w-60 p-3 font-bold">Email</td>
+                    <td contenteditable="false" class="w-32 p-3 font-bold">No. Telp</td>
+                    <td contenteditable="false" class="w-28 p-3 font-bold">Role</td>
+                    <td contenteditable="false" class="w-24 p-3 font-bold">Status</td>
+                    <td contenteditable="false" class="w-24 p-3 font-bold">Kelola</td>
                 </tr>
             @endslot
 
             @slot('tableBody')
                 @if (count($users) > 0)
                     @foreach ($users as $item)
-                        <tr class=" py-5">
-                            <!--[-->
-                            {{-- <td class=" py-5 border border-gray-200   p-4" contenteditable="false">{{ $item->company->name }}</td> --}}
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->name }}</td>
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->email }}</td>
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->company->name }}</td>
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->phone_number }}</td>
-                            <td contenteditable="false" class=" py-5 border border-gray-200   p-4">{{ $item->getRoleNames()[0] }}</td>
-                            <td class="py-5 border-gray-200 p-4">
-                                @component('components.modal')
-                                    @slot('buttonModal')
-                                        <flux:button variant="primary" icon="pencil"></flux:button>
-                                    @endslot
+                        <tr class="border-b">
+                            <td contenteditable="false" class="p-3">{{ $item->name }}</td>
+                            <td contenteditable="false" class="p-3">{{ $item->company->name }}</td>
+                            <td contenteditable="false" class="p-3">{{ $item->email }}</td>
+                            <td contenteditable="false" class="p-3">{{ $item->phone_number }}</td>
+                            <td contenteditable="false" class="p-3">{{ $item->getRoleNames()[0] }}</td>
+                            <td contenteditable="false" class="p-3">{{ $item->is_active ? 'Active' : 'Inactive' }}</td>
+                            <td class="p-3">
+                                <div class="flex justify-center items-center space-x-2">
+                                    <div>
+                                        @component('components.modal')
+                                            @slot('buttonModal')
+                                                <button class="text-green-500">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            @endslot
+                                            @slot('triggerModal')
+                                                modal-edit-{{ $item->id }}
+                                            @endslot
+                                            @slot('modalInputForm')
+                                                <div>
+                                                    <flux:heading size="lg">Edit Data</flux:heading>
+                                                    <flux:text class="mt-2">Edit Account.</flux:text>
+                                                </div>
 
-                                    @slot('triggerModal')
-                                        modal-edit-{{ $item->id }}
-                                    @endslot
+                                                <form action="{{ route('account.update', $item->id) }}" method="post">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <flux:input label="Nama" type="text" name="name" placeholder="Masukkan Nama"
+                                                        value="{{ $item->name ?? '' }}" />
+                                                    <flux:input label="Email" type="email" name="email" placeholder="Masukkan Email"
+                                                        value="{{ $item->email ?? '' }}" />
+                                                    <flux:input label="No. Telp" type="text" name="phone_number"
+                                                        placeholder="Masukkan No. Telp" value="{{ $item->phone_number ?? '' }}" />
 
-                                    @slot('modalInputForm')
-                                        <div>
-                                            <flux:heading size="lg">Edit Data</flux:heading>
-                                            <flux:text class="mt-2">Edit Account.</flux:text>
-                                        </div>
+                                                    <flux:select name="company_id" class="mb-4" label="Company">
+                                                        <flux:select.option>-- Pilih --</flux:select.option>
+                                                        @foreach ($companies as $company)
+                                                            <flux:select.option value="{{ $company->id }}" :selected="$item->company_id">
+                                                                {{ $company->name }}</flux:select.option>
+                                                        @endforeach
+                                                    </flux:select>
 
-                                        <form action="{{ route('account.update', $item->id) }}" method="post">
-                                            @csrf
-                                            @method('PUT')
-                                                <flux:input label="Nama" type="text" name="name" placeholder="Masukkan Nama" value="{{ $item->name ?? '' }}" />
-                                                <flux:input label="Email" type="email" name="email" placeholder="Masukkan Email" value="{{ $item->email ?? '' }}" />
-                                                <flux:input label="No. Telp" type="text" name="phone_number" placeholder="Masukkan No. Telp" value="{{ $item->phone_number ?? '' }}" />
+                                                    <flux:select name="role_id" class="mb-4" label="Role">
+                                                        <flux:select.option>-- Pilih --</flux:select.option>
+                                                        @foreach ($roles as $role)
+                                                            <flux:select.option value="{{ $role->id }}"
+                                                                :selected="$item->hasRole($role->name)">{{ $role->name }}
+                                                            </flux:select.option>
+                                                        @endforeach
+                                                    </flux:select>
 
-                                                <flux:select name="company_id" class="mb-4" label="Company">
-                                                    <flux:select.option>-- Pilih --</flux:select.option>
-                                                    @foreach ($companies as $company)
-                                                        <flux:select.option value="{{ $company->id }}" :selected="$item->company_id">{{ $company->name }}</flux:select.option>
-                                                    @endforeach
-                                                </flux:select>
+                                                    <div class="flex">
+                                                        <flux:spacer />
 
-                                                <flux:select name="role_id" class="mb-4" label="Role">
-                                                    <flux:select.option>-- Pilih --</flux:select.option>
-                                                    @foreach ($roles as $role)
-                                                        <flux:select.option value="{{ $role->id }}" :selected="$item->hasRole($role->name)">{{ $role->name }}</flux:select.option>
-                                                    @endforeach
-                                                </flux:select>
+                                                        <flux:button type="submit" variant="primary">Simpan</flux:button>
+                                                    </div>
+                                                </form>
+                                            @endslot
+                                        @endcomponent
+                                    </div>
 
-                                            <div class="flex">
-                                                <flux:spacer />
-
-                                                <flux:button type="submit" variant="primary">Simpan</flux:button>
-                                            </div>
-                                        </form>
-                                    @endslot
-                                @endcomponent
-
-                                @component('components.modal-delete')
-                                    @slot('triggerName')
-                                        modal-delete-{{ $item->id }}
-                                    @endslot
-
-                                    @slot('url')
-                                        {{ route('account.delete', $item->id) }}
-                                    @endslot
-                                @endcomponent
+                                    <div>
+                                        @component('components.modal-delete')
+                                            @slot('triggerName')
+                                                modal-delete-{{ $item->id }}
+                                            @endslot
+                                            @slot('url')
+                                                {{ route('account.delete', $item->id) }}
+                                            @endslot
+                                        @endcomponent
+                                    </div>
+                                </div>
                             </td>
-                            <!--]-->
                         </tr>
                     @endforeach
                 @else
@@ -164,6 +176,10 @@
                 @endif
             @endslot
         @endcomponent
+
+        {{ $users->links() }}
+
+        @include('components.search-script')
 
     </flux:main>
 @endsection
