@@ -28,12 +28,12 @@
                         @endforeach
                     </flux:select>
 
-                    <flux:input label="Nama Tenant" type="text" name="tenant_name" placeholder="Nama tenant" />
-                    <flux:input label="Nomor Telepon" type="number" name="phone" placeholder="Nomor telepon tenant" />
-                    <flux:input label="Email" type="email" name="email" placeholder="Email tenant" />
-                    <flux:input label="Nama PIC" type="text" name="pic_name" placeholder="Nama PIC" />
-                    <flux:input label="Nama Brand" type="text" name="brand_name" placeholder="Nama Brand" />
-                    <flux:textarea label="Alamat" name="address" placeholder="Masukkan alamat tenant" />
+                    <flux:input label="Nama Tenant" type="text" name="tenant_name" placeholder="Nama tenant"  required/>
+                    <flux:input label="Nomor Telepon" type="number" name="phone" placeholder="Nomor telepon tenant"  required/>
+                    <flux:input label="Email" type="email" name="email" placeholder="Email tenant"  required/>
+                    <flux:input label="Nama PIC" type="text" name="pic_name" placeholder="Nama PIC"  required/>
+                    <flux:input label="Nama Brand" type="text" name="brand_name" placeholder="Nama Brand" required />
+                    <flux:textarea label="Alamat" name="address" placeholder="Masukkan alamat tenant" required />
 
                     <div class="flex mt-5">
                         <flux:spacer />
@@ -80,11 +80,8 @@
                             @component('components.modal')
                             @slot('buttonModal')
                             <button class="text-green-500">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                                    </path>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
                             </button>
                             @endslot
@@ -122,6 +119,7 @@
                                     {{ $tenant->address }}
                                 </flux:textarea>
 
+
                                 <div class="flex mt-5">
                                     <flux:spacer />
                                     <flux:button type="submit" variant="primary">Simpan</flux:button>
@@ -137,11 +135,16 @@
                             @slot('url') {{ route('tenant.delete', $tenant->id) }} @endslot
                             @endcomponent
                         </div>
+
                     </div>
                 </td>
             </tr>
-        @endforeach
-        @endslot
-        @endcomponent
-    </flux:main>
+
+            @endforeach
+            @endslot
+            @endcomponent
+
+
+</flux:main>
 @endsection
+

@@ -26,6 +26,8 @@ class TenantController extends Controller
         $input = $request->all();
 
         $rules = [
+
+            'company_id' => 1,
             'busscat_id' => ['required'],
             'tenant_name' => ['required'],
             'phone' => ['required'],
@@ -40,7 +42,7 @@ class TenantController extends Controller
         ];
 
 
-        $validates = Validator::make($input, $rules, $messages)->validate();
+        // $validates = Validator::make($input, $rules, $messages)->validate();
 
         $tenant = Tenant::create([
             'company_id' => 1,
