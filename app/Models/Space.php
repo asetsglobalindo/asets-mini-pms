@@ -19,6 +19,7 @@ class Space extends Model
         'min_period',
         'price',
         'description',
+        'public',
     ];
 
     public function listing()
