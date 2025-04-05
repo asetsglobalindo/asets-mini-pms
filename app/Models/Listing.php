@@ -4,32 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
-class Legend extends Model
+class Listing extends Model
 {
     use HasFactory;
-
-    protected $table = 'legends';
 
     protected $fillable = [
         'company_id',
         'name',
         'slug',
-        'icon',
+        'cover',
+        'address',
+        'longitude',
+        'latitude',
+        'public',
     ];
 
     public function company()
     {
         return $this->belongsTo(Company::class);
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($legend) {
-            $legend->slug = Str::slug($legend->name);
-        });
     }
 }

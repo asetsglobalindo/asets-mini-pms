@@ -16,6 +16,7 @@ class Facility extends Model
         'company_id',
         'name',
         'slug',
+        'icon',
     ];
 
     public function company()
